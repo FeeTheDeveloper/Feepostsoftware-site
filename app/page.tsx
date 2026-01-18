@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Card, SectionHeading, Button, Container } from '@/components'
 
 export default function Home() {
@@ -20,35 +21,41 @@ export default function Home() {
   ]
 
   return (
-    <div className="py-16">
+    <div>
       {/* Hero Section */}
-      <Container className="mb-20">
-        <div className="max-w-4xl">
-          <p className="text-brand-accent font-semibold mb-4 tracking-wide uppercase text-sm">
-            Veteran-Owned Technology Firm
-          </p>
-          <h1 className="text-5xl font-bold text-brand-white mb-6 leading-tight">
-            Software Engineering &<br />Digital Infrastructure Solutions
+      <section className="min-h-[70vh] md:min-h-[80vh] flex items-center justify-center bg-brand-bg">
+        <div className="flex flex-col items-center text-center px-4 py-12">
+          {/* Centered Logo */}
+          <div className="w-full max-w-[240px] md:max-w-[320px] lg:max-w-[420px] mb-8">
+            <Image
+              src="/assets/feepost-logo.png"
+              alt="Feepost Software & Development Corporation Logo"
+              width={420}
+              height={420}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+          
+          {/* Headline */}
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white mb-6 max-w-2xl leading-tight">
+            Veteran-Owned Software Engineering & Digital Infrastructure
           </h1>
-          <p className="text-xl text-brand-neutral mb-8 max-w-3xl">
-            Feepost Software & Development Corporation delivers scalable software engineering, 
-            systems development, and digital infrastructure solutions. Built with a mission-first 
-            mindset, we support government agencies and commercial enterprises requiring secure, 
-            reliable, and performance-driven technology execution.
-          </p>
-          <div className="flex gap-4">
-            <Link href="/contact">
-              <Button variant="primary">Get in Touch</Button>
-            </Link>
+          
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/services">
-              <Button variant="outline">Our Services</Button>
+              <Button variant="primary">View Services</Button>
+            </Link>
+            <Link href="/contact">
+              <Button variant="accent">Contact</Button>
             </Link>
           </div>
         </div>
-      </Container>
+      </section>
 
       {/* Core Services Section */}
-      <Container className="mb-20">
+      <Container className="py-20">
         <SectionHeading
           title="Core Services"
           subtitle="Comprehensive technology solutions for government and enterprise"
@@ -63,7 +70,7 @@ export default function Home() {
       </Container>
 
       {/* Why Feepost Section */}
-      <Container className="mb-20">
+      <Container className="py-20">
         <SectionHeading
           title="Why Feepost"
           subtitle="What sets us apart in delivering technology solutions"
@@ -79,7 +86,7 @@ export default function Home() {
       </Container>
 
       {/* CTA Section */}
-      <Container>
+      <Container className="pb-20">
         <Card className="text-center py-12">
           <h2 className="text-2xl font-bold text-brand-white mb-4">
             Ready to Start Your Project?
