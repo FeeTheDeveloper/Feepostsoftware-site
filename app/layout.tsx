@@ -7,8 +7,11 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Feepost Software & Development Corporation',
-  description: 'Professional software development and IT services',
+  title: {
+    default: 'Feepost Software & Development Corporation',
+    template: '%s | Feepost Software',
+  },
+  description: 'Veteran-Owned Software Engineering & Digital Infrastructure Solutions. Delivering scalable software, systems development, and secure technology for government and enterprise.',
 }
 
 export default function RootLayout({
