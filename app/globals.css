@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-white antialiased;
+  }
+
+  /* Focus states for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-accent;
+  }
+
+  /* Default link styling */
+  a {
+    @apply transition-colors;
+  }
+}
+
+@layer components {
+  /* Muted text utility */
+  .text-muted {
+    @apply text-brand-neutral;
+  }
+
+  /* Border utilities */
+  .border-subtle {
+    @apply border-brand-charcoal/30;
+  }
+
+  .divide-subtle > * + * {
+    @apply border-brand-charcoal/30;
+  }
+}
