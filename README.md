@@ -1,6 +1,6 @@
 # Feepost Software & Development Corporation
 
-A professional Next.js website for Feepost Software & Development Corporation, built with modern web technologies.
+Veteran-Owned Software Engineering & Digital Infrastructure Solutions. A production-ready Next.js website built with modern web technologies.
 
 ## Tech Stack
 
@@ -9,6 +9,7 @@ A professional Next.js website for Feepost Software & Development Corporation, b
 - **Styling:** Tailwind CSS
 - **Linting:** ESLint
 - **Node:** 20.x
+- **Deployment:** Vercel-optimized
 
 ## Getting Started
 
@@ -58,111 +59,147 @@ The build process will:
 ├── app/                    # Next.js App Router pages
 │   ├── layout.tsx         # Root layout with Navbar & Footer
 │   ├── page.tsx           # Home page (/)
+│   ├── globals.css        # Global styles & Tailwind imports
 │   ├── services/          # Services page (/services)
 │   ├── government/        # Government page (/government)
 │   ├── readiness/         # Readiness page (/readiness)
-│   ├── contact/           # Contact page (/contact)
-│   └── globals.css        # Global styles & Tailwind imports
+│   └── contact/           # Contact page (/contact)
 ├── components/            # Reusable React components
 │   ├── Navbar.tsx         # Navigation bar
-│   └── Footer.tsx         # Footer component
+│   ├── Footer.tsx         # Footer component
+│   ├── Button.tsx         # Button variants (primary, accent, outline)
+│   ├── Card.tsx           # Dark surface card component
+│   ├── Container.tsx      # Responsive container wrapper
+│   ├── SectionHeading.tsx # Section title + subtitle
+│   └── index.ts           # Component exports
 ├── lib/                   # Utility functions and helpers
-├── public/                # Static assets (images, fonts, etc.)
+├── public/                # Static assets
+│   └── assets/
+│       └── feepost-logo.png  # Company logo
 └── package.json           # Dependencies and scripts
 ```
 
 ## Deploying to Vercel
 
-This project is optimized for deployment on Vercel:
+This project is optimized for zero-config deployment on Vercel.
 
-### Method 1: GitHub Integration (Recommended)
+### Step 1: Import Project
 
-1. Push your code to a GitHub repository
-2. Visit [vercel.com](https://vercel.com)
-3. Click "Import Project"
-4. Select your GitHub repository
-5. Vercel will automatically detect Next.js and configure settings
-6. Click "Deploy"
+1. Go to [vercel.com](https://vercel.com) and sign in (or create account)
+2. Click **"Add New..."** → **"Project"**
+3. Select **"Import Git Repository"**
+4. Connect your GitHub account if not already connected
+5. Find and select the `Feepostsoftware-site` repository
+6. Click **"Import"**
 
-### Method 2: Vercel CLI
+### Step 2: Configure Project
 
-1. **Install Vercel CLI:**
-   ```bash
-   npm install -g vercel
-   ```
+Vercel auto-detects Next.js. Default settings work out of the box:
 
-2. **Deploy:**
-   ```bash
-   vercel
-   ```
+| Setting | Value |
+|---------|-------|
+| Framework Preset | Next.js |
+| Build Command | `npm run build` |
+| Output Directory | `.next` |
+| Install Command | `npm install` |
+| Node.js Version | 20.x |
 
-3. **Follow the prompts** to link your project
+Click **"Deploy"** — no changes needed.
 
-### Deployment Configuration
+### Step 3: Attach Custom Domain
 
-Vercel automatically configures:
-- Build command: `npm run build`
-- Output directory: `.next`
-- Install command: `npm install`
-- Node.js version: 20.x (specified in package.json)
+After deployment completes:
 
-No additional configuration is required.
+1. Go to your project dashboard on Vercel
+2. Click **"Settings"** → **"Domains"**
+3. Enter your domain (e.g., `feepost.com` or `www.feepost.com`)
+4. Click **"Add"**
+5. Update your DNS records as instructed:
+   - **Option A (Recommended):** Add CNAME record pointing to `cname.vercel-dns.com`
+   - **Option B:** Add A record pointing to Vercel's IP addresses
+6. Vercel automatically provisions SSL certificate
+
+**DNS Propagation:** May take up to 48 hours, typically within minutes.
+
+### Step 4: Production Deployments
+
+- **Automatic:** Push to `main` branch triggers production deploy
+- **Preview:** Pull requests get unique preview URLs
+- **Rollback:** One-click rollback from Vercel dashboard
 
 ## Updating Content
 
-### Adding New Pages
+### Contact Email Configuration
 
-1. Create a new folder in `app/` with the route name
-2. Add a `page.tsx` file inside the folder
-3. Update the navigation in `components/Navbar.tsx`
+The contact form currently uses a placeholder email. To update:
 
-Example:
-```tsx
-// app/about/page.tsx
-export default function AboutPage() {
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold">About Us</h1>
-      {/* Your content */}
-    </div>
-  )
+1. Open `app/contact/page.tsx`
+2. Find the mailto link (search for `info@feepost.com`)
+3. Replace with your actual contact email:
+   ```tsx
+   href="mailto:your-email@feepost.com"
+   ```
+
+**Future Enhancement:** To add form backend, integrate with:
+- Vercel Serverless Functions + email service (SendGrid, Resend)
+- Third-party form service (Formspree, Basin)
+
+### Modifying Pages
+
+| Page | File |
+|------|------|
+| Home | `app/page.tsx` |
+| Services | `app/services/page.tsx` |
+| Government | `app/government/page.tsx` |
+| Readiness | `app/readiness/page.tsx` |
+| Contact | `app/contact/page.tsx` |
+| Navigation | `components/Navbar.tsx` |
+| Footer | `components/Footer.tsx` |
+
+### Updating Logo
+
+Replace the logo file at `public/assets/feepost-logo.png`. Recommended:
+- Format: PNG with transparency
+- Size: At least 420×420px for crisp display
+- The logo is used in three places: hero, navbar, and footer
+
+### Brand Colors
+
+Brand tokens are defined in `tailwind.config.js`:
+
+```js
+colors: {
+  brand: {
+    bg: '#0B0B0B',        // Background
+    primary: '#196C24',    // Primary green
+    primaryAlt: '#58912F', // Hover green
+    accent: '#F8BF07',     // Yellow accent
+    charcoal: '#323419',   // Borders
+    neutral: '#A8A9A9',    // Muted text
+    white: '#FEFEFE',      // Text
+  }
 }
 ```
 
-### Modifying Existing Content
-
-- **Home page:** Edit `app/page.tsx`
-- **Services page:** Edit `app/services/page.tsx`
-- **Government page:** Edit `app/government/page.tsx`
-- **Readiness page:** Edit `app/readiness/page.tsx`
-- **Contact page:** Edit `app/contact/page.tsx`
-- **Navigation:** Edit `components/Navbar.tsx`
-- **Footer:** Edit `components/Footer.tsx`
-
-### Styling
-
-This project uses Tailwind CSS. Common classes:
-- Container: `container mx-auto px-4`
-- Headings: `text-4xl font-bold text-slate-900`
-- Cards: `bg-white p-6 rounded-lg shadow-md`
-- Buttons: `bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded`
-
-For custom styles, edit `app/globals.css` or configure `tailwind.config.js`.
-
 ## Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm start` | Start production server |
+| `npm run lint` | Run ESLint |
 
 ## Environment Variables
 
-Create a `.env.local` file in the root directory for environment-specific variables:
+Create a `.env.local` file for environment-specific variables:
 
 ```env
-# Example
+# Example API configuration
 NEXT_PUBLIC_API_URL=https://api.example.com
+
+# Contact form backend (future)
+CONTACT_EMAIL=info@feepost.com
 ```
 
 Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
