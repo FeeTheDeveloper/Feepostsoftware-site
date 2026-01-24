@@ -3,33 +3,43 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: 210 33% 96%;
+    --foreground: 218 33% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 218 33% 14%;
+    --primary: 217 54% 32%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 28% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 213 88% 56%;
+    --accent-foreground: 210 40% 98%;
+    --muted: 210 22% 90%;
+    --muted-foreground: 215 16% 40%;
+    --border: 215 28% 86%;
+    --ring: 213 88% 56%;
+    --radius: 16px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
   body {
-    @apply bg-brand-bg text-brand-white antialiased;
+    @apply bg-background text-foreground antialiased;
   }
 
-  /* Focus states for accessibility */
-  *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-accent;
-  }
-
-  /* Default link styling */
   a {
     @apply transition-colors;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 }
 
 @layer components {
-  /* Muted text utility */
   .text-muted {
-    @apply text-brand-neutral;
-  }
-
-  /* Border utilities */
-  .border-subtle {
-    @apply border-brand-charcoal/30;
-  }
-
-  .divide-subtle > * + * {
-    @apply border-brand-charcoal/30;
+    @apply text-muted-foreground;
   }
 }
